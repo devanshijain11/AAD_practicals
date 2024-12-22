@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Search Algorithm Comparison</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+    <header>
+        <h1>Algorithm Analysis & Employee Data</h1>
+    </header>
+    <main>
+        <section class="form-section">
+            <h2>Submit Data</h2>
+            <form action="/submit" method="post">
+                <label for="numbers">Numbers (comma-separated):</label>
+                <input type="text" id="numbers" name="numbers" placeholder="e.g., 10, 20, 30" required>
+                <button type="submit">Analyze</button>
+            </form>
+        </section>
+
+        {% if results %}
+            <section class="results">
+                <div class="summary">
+                    <h3>Summary</h3>
+                    <p><strong>Highest Salary Designation:</strong> {{ results.highest_salary_designation }}</p>
+                    <p><strong>Lowest Salary Employee:</strong> {{ results.lowest_salary_employee_name }}</p>
+                    <p><strong>Youngest Employee Mobile:</strong> {{ results.youngest_employee_mobile }}</p>
+                    <p><strong>Oldest Employee Salary:</strong> {{ results.oldest_employee_salary }}</p>
+                </div>
+
+                <div class="chart">
+                    <h3>Search Algorithm Operations</h3>
+                    <img src="data:image/png;base64,{{ graph_url }}" alt="Search Algorithm Graph">
+                </div>
+
+                <div class="employee-list">
+                    <h3>Employee Details</h3>
+                    <ul>
+                        {% for employee in results.employees %}
+                            <li><strong>ID:</strong> {{ employee.employeeID }} - <strong>Name:</strong> {{ employee.name }} - <strong>Designation:</strong> {{ employee.designation }}</li>
+                        {% endfor %}
+                    </ul>
+                </div>
+
+                <div class="operations-count">
+                    <h3>Operations Count</h3>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Number of Elements</th>
+                                <th>Linear Search Count</th>
+                                <th>Binary Search Count</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for i in range(results.numbers|length) %}
+                                <tr>
+                                    <td>{{ results.numbers[i] }}</td>
+                                    <td>{{ results.linear_search_counts[i] }}</td>
+                                    <td>{{ results.binary_search_counts[i] }}</td>
+                                </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+        {% endif %}
+    </main>
+</body>
+</html>

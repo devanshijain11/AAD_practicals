@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Closest Pair Sum</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+            text-align: center;
+        }
+        
+        .heading{
+            text-align: center;
+            background-color: #000000;
+            color: #ffffff;
+            padding: 10px;
+            border-radius: 5px;
+            margin-bottom: 20px;
+        }
+
+        .form-group input[type="text"] {
+            width: calc(60% - 20px);
+            padding: 5px;
+            border: 1px solid #ccc;
+            border-radius: 3px;
+        } 
+
+        .form-group input[type="submit"] {
+            background-color: #000000;
+            color: #ffffff;
+            padding: 10px;
+            border-radius: 5px;
+            margin-top: 20px;
+            
+         } 
+       
+
+    </style>
+</head>
+<body>
+    
+    <h1 class="heading">Find the Pair with the Closest Sum to Zero</h1>
+    <div class="form-group">
+    <form method="post">
+        <label for="numbers">Enter numbers : </label><br>
+        <input type="text" id="numbers" name="numbers" required><br><br>
+        <input type="submit" value="Submit">
+    </form>
+
+    {% if result %}
+        <h2>Result:</h2>
+        <p>{{ result }}</p>
+    {% endif %}
+</div>
+</body>
+</html>

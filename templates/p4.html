@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Search Algorithm Comparison</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+    <div class="container">
+        <h1>Search Algorithm Comparison</h1>
+        <form action="/submit" method="post">
+            <label for="numbers">Enter Numbers (comma-separated):</label>
+            <input type="text" id="numbers" name="numbers" required>
+            <button type="submit">Submit</button>
+        </form>
+
+        {% if results %}
+            <div class="results">
+                <h2>Results</h2>
+                <p><strong>Highest Salary Designation:</strong> {{ results.highest_salary_designation }}</p>
+                <p><strong>Lowest Salary Employee Name:</strong> {{ results.lowest_salary_employee_name }}</p>
+                <p><strong>Youngest Employee Mobile:</strong> {{ results.youngest_employee_mobile }}</p>
+                <p><strong>Oldest Employee Salary:</strong> {{ results.oldest_employee_salary }}</p>
+
+                <h3>Graph of Search Algorithm Operations</h3>
+                <img src="data:image/png;base64,{{ graph_url }}" alt="Search Algorithm Graph">
+
+                <h3>Employee List</h3>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Name</th>
+                            <th>Designation</th>
+                            <th>Salary</th>
+                            <th>Age</th>
+                            <th>Mobile Number</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for employee in results.employees %}
+                            <tr>
+                                <td>{{ employee.employeeID }}</td>
+                                <td>{{ employee.name }}</td>
+                                <td>{{ employee.designation }}</td>
+                                <td>{{ employee.salary }}</td>
+                                <td>{{ employee.age }}</td>
+                                <td>{{ employee.mobile_number }}</td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+
+                <h3>Operations Count</h3>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Number of Elements</th>
+                            <th>Linear Search Count</th>
+                            <th>Binary Search Count</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for i in range(results.numbers|length) %}
+                            <tr>
+                                <td>{{ results.numbers[i] }}</td>
+                                <td>{{ results.linear_search_counts[i] }}</td>
+                                <td>{{ results.binary_search_counts[i] }}</td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        {% endif %}
+    </div>
+</body>
+</html>

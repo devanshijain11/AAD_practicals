@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fractional Knapsack Problem</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f9;
+            padding: 20px;
+        }
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        h1 {
+            text-align: center;
+            color: #333;
+        }
+        .form-group {
+            margin-bottom: 15px;
+        }
+        label {
+            font-weight: bold;
+            color: #555;
+        }
+        input[type="text"], input[type="number"] {
+            width: 100%;
+            padding: 8px;
+            margin-top: 5px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
+        button {
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px 15px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+            width: 100%;
+        }
+        button:hover {
+            background-color: #45a049;
+        }
+        .result {
+            margin-top: 20px;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 10px;
+        }
+        table, th, td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: center;
+        }
+        th {
+            background-color: #f4f4f4;
+        }
+        td {
+            background-color: #fafafa;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Fractional Knapsack Problem</h1>
+        <form method="POST">
+            <div class="form-group">
+                <label for="profits">Enter Profits (comma separated):</label>
+                <input type="text" id="profits" name="profits" required>
+            </div>
+            <div class="form-group">
+                <label for="weights">Enter Weights (comma separated):</label>
+                <input type="text" id="weights" name="weights" required>
+            </div>
+            <div class="form-group">
+                <label for="capacity">Enter Knapsack Capacity:</label>
+                <input type="number" id="capacity" name="capacity" required>
+            </div>
+            <button type="submit">Calculate</button>
+        </form>
+
+        {% if total_profit %}
+        <div class="result">
+            <h2>Total Profit: {{ total_profit }}</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Item</th>
+                        <th>Profit</th>
+                        <th>Weight</th>
+                        <th>Ratio</th>
+                        <th>Selected Quantity</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for item in sorted_items %}
+                    <tr>
+                        <td>{{ loop.index0 | string | upper }}</td> <!-- Display the item name (A, B, C, D) -->
+                        <td>{{ item[0] }}</td> <!-- Profit -->
+                        <td>{{ item[1] }}</td> <!-- Weight -->
+                        <td>{{ item[2] }}</td> <!-- Ratio -->
+                        <td>{{ selected_items[loop.index0] }}</td> <!-- Selected Quantity -->
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+        {% endif %}
+    </div>
+</body>
+</html>

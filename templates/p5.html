@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Coin Change Analysis</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+        }
+        h1 {
+            color: #333;
+            margin-top: 20px;
+        }
+        img {
+            margin-top: 20px;
+            border: 1px solid #ccc;
+            background-color: #fff;
+        }
+        form {
+            margin: 20px;
+        }
+        input[type="number"] {
+            padding: 10px;
+            font-size: 16px;
+            width: 200px;
+        }
+        input[type="submit"] {
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+        .result {
+            margin: 20px;
+            font-size: 18px;
+            color: #333;
+        }
+    </style>
+</head>
+<body>
+    <h1>Minimum Coins Required for Various Amounts</h1>
+    <img src="data:image/png;base64,{{ image_data }}" alt="Coin Change Plot" />
+    
+    <form method="POST" action="/">
+        <label for="amount">Enter Amount (Rs.): </label>
+        <input type="number" id="amount" name="amount" required>
+        <input type="submit" value="Calculate">
+    </form>
+
+    {% if min_coins_result is not none %}
+        <div class="result">
+            {% if min_coins_result == "Invalid input. Please enter a valid integer." %}
+                {{ min_coins_result }}
+            {% else %}
+                Minimum number of coins required for Rs. {{ user_amount }}: {{ min_coins_result }}
+            {% endif %}
+        </div>
+    {% endif %}
+</body>
+</html>
